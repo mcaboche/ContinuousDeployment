@@ -1,11 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {AsideComponent} from './aside/aside.component';
+import {ContentComponent} from './content/content.component';
+import {MenuComponent} from './menu/menu.component';
+import {FooterComponent} from './footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        AsideComponent,
+        ContentComponent,
+        MenuComponent,
+        FooterComponent
       ],
     }).compileComponents();
   }));
@@ -14,18 +24,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'demo-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('demo-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('demo-app app is running!');
   });
 });
