@@ -3,20 +3,19 @@ pipeline{
         label 'master'
     }
   stages{
-    stage ('checkout'){
+    stage ('Checkout'){
       steps{
         checkout scm
       }
     }
-    stage ('install modules'){
+    stage ('Install node modules'){
       steps{
         sh '''
           npm install --verbose -d
-          npm install --save classlist.js
         '''
       }
     }
-    stage ('test'){
+    stage ('Test'){
       steps{
         sh '''
           $(npm bin)/ng test --single-run --browsers Chrome_no_sandbox
@@ -28,12 +27,12 @@ pipeline{
           }
       }
     }
-    stage ('code quality'){
+    stage ('Code quality'){
       steps{
         sh '$(npm bin)/ng lint'
       }
     }
-    stage ('build') {
+    stage ('Build') {
       steps{
         sh '$(npm bin)/ng build --prod --build-optimizer'
       }
