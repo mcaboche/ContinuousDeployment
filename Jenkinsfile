@@ -3,7 +3,7 @@ pipeline{
         label 'master'
     }
   stages{
-    stage ('Checkout'){
+    /*stage ('Checkout'){
       steps{
         checkout scm
       }
@@ -30,6 +30,12 @@ pipeline{
     stage ('Build') {
       steps{
         sh 'npm run-script build'
+      }
+    }*/
+
+    stage ('Deployment') {
+      steps{
+        sh ('deployment.sh')
       }
     }
   }
