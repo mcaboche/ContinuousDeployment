@@ -3,7 +3,7 @@ pipeline{
         label 'master'
     }
   stages{
-    /*stage ('Checkout'){
+    stage ('Checkout'){
       steps{
         checkout scm
       }
@@ -31,11 +31,13 @@ pipeline{
       steps{
         sh 'npm run-script build'
       }
-    }*/
+    }
 
     stage ('Deployment') {
       steps{
-        sh ('deployment.sh')
+        sh ('ls')
+        sh ("chmod +x ./deployment.sh")
+        sh ('./deployment.sh ' + env.BRANCH_NAME)
       }
     }
   }
