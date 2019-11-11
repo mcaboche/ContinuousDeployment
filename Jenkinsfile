@@ -4,11 +4,21 @@ pipeline{
     }
   stages{
     stage ('Checkout'){
+      when {
+       expression {
+           return env.BRANCH_NAME != 'master' || env.CHANGE_ID != '';
+       }
+      }
       steps{
         checkout scm
       }
     }
     stage ('Install node modules'){
+      when {
+       expression {
+           return env.BRANCH_NAME != 'master' || env.CHANGE_ID != '';
+       }
+      }
       steps{
         sh '''
           npm install --verbose -d
@@ -16,6 +26,11 @@ pipeline{
       }
     }
     stage ('Test'){
+      when {
+       expression {
+           return env.BRANCH_NAME != 'master' || env.CHANGE_ID != '';
+       }
+      }
       steps{
         sh '''
           npm test
@@ -28,14 +43,23 @@ pipeline{
       }
     }
     stage ('Build') {
+      when {
+       expression {
+           return env.BRANCH_NAME != 'master' || env.CHANGE_ID != '';
+       }
+      }
       steps{
         sh 'npm run-script build'
       }
     }
 
     stage ('Deployment') {
+      when {
+       expression {
+           return env.BRANCH_NAME != 'master' || env.CHANGE_ID != '';
+       }
+      }
       steps{
-        sh ('ls')
         sh ("chmod +x ./deployment.sh")
         sh ('./deployment.sh ' + env.BRANCH_NAME)
       }
